@@ -7,31 +7,30 @@
 
     </head>
     <body>
+            @if( users==null ){
+                <h1>No users found</h1>
+            }else {
 
-
-        @if(users.size==0){
-            <h1>No User Found !!!!!!!</h1>
-            <a href="@routes.UserController.create()" >Add New User</a>
-        }else {
-            <h3>All Users Data</h3>
-            <table>
-                <tr>
-                    <th>Id</th>
-                    <th>First_Name</th>
-                    <th>Last_Name</th>
-                    <th>Age</th>
-                </tr>
-
-                @for(user <- users) {
+                <h3>All Users Data</h3>
+                <table>
                     <tr>
-                        <th>@user.id</th>
-                        <th>@user.firstname</th>
-                        <th>@user.lastname</th>
-                        <th>@user.age</th>
+                        <th>Id</th>
+                        <th>First_Name</th>
+                        <th>Last_Name</th>
+                        <th>Age</th>
                     </tr>
-                }
-            </table>
+
+                    @for(user <- users) {
+                        <tr>
+                            <th>@user.id</th>
+                            <th>@user.firstname</th>
+                            <th>@user.lastname</th>
+                            <th>@user.age</th>
+                        </tr>
+                    }
+                </table>
+            }
             <a href="@routes.UserController.create()" >Add New User</a>
-        }
+
     </body>
 </html>

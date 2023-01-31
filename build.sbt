@@ -12,7 +12,7 @@ lazy val root = (project in file("."))
       "com.rabbitmq" % "amqp-client" % "5.16.0",
 
       // https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-core
-       "org.hibernate" % "hibernate-core" % "5.2.8.Final" ,
-"com.fasterxml.jackson.core" % "jackson-databind" % "2.14.2"
+       "org.hibernate" % "hibernate-core" % "5.2.8.Final"
+
     )
   )

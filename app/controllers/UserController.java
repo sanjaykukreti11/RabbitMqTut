@@ -27,10 +27,9 @@ public class UserController extends Controller {
 
 
     public Result  index(){
-
-        Set<Users> user_list = Users.allUsers();
-
-        return ok(users.render( user_list ));
+        Set<Users> users_list = Users.allUsers();
+//        System.out.println( users_list.isEmpty() );
+        return ok(users.render( users_list ));
     }
 
     public Result create( ){

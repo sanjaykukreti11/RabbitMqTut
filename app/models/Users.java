@@ -1,18 +1,9 @@
 package models;
 
 import Rabbit.Producer;
-import org.hibernate.Criteria;
-import org.hibernate.Hibernate;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.jpa.HibernateQuery;
 
 import javax.persistence.*;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeoutException;
 
@@ -36,7 +27,9 @@ public class Users {
 
     }
 
-    private static Set<Users> users_list;
+    private static Set<Users> users_list ;
+
+
 
 
 
@@ -47,11 +40,16 @@ public class Users {
 
 
     public static Users findById(Integer id){
-        for(Users user : users_list){
-            if(user.id.equals(id)){
-                return user;
+        try {
+            for(Users user : users_list){
+                if(user.id.equals(id)){
+                    return user;
+                }
             }
+        }catch (Exception e){
+
         }
+
         return null;
     }
 
@@ -62,10 +60,6 @@ public class Users {
         Producer.save();
     }
 
-
-    public static boolean remove(Users user){
-        return users_list.remove(user);
-    }
 
 
 
