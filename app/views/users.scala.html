@@ -1,0 +1,37 @@
+@(users : Set[Users])
+
+
+
+<html>
+    <head>
+
+    </head>
+    <body>
+
+
+        @if(users.size==0){
+            <h1>No User Found !!!!!!!</h1>
+            <a href="@routes.UserController.create()" >Add New User</a>
+        }else {
+            <h3>All Users Data</h3>
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>First_Name</th>
+                    <th>Last_Name</th>
+                    <th>Age</th>
+                </tr>
+
+                @for(user <- users) {
+                    <tr>
+                        <th>@user.id</th>
+                        <th>@user.firstname</th>
+                        <th>@user.lastname</th>
+                        <th>@user.age</th>
+                    </tr>
+                }
+            </table>
+            <a href="@routes.UserController.create()" >Add New User</a>
+        }
+    </body>
+</html>
