@@ -3,7 +3,6 @@ package models;
 import Rabbit.Producer;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
 import javax.persistence.*;
@@ -32,12 +31,6 @@ public class Users {
 
     }
 
-    private static Set<Users> users_list ;
-
-
-
-
-
     public static List<Users> allUsers(){
 
         Configuration con = new Configuration().configure().addAnnotatedClass(Users.class);
@@ -58,6 +51,7 @@ public class Users {
 
 
     public static Users findById(Integer id){
+        List<Users> users_list = allUsers();
         try {
             for(Users user : users_list){
                 if(user.id.equals(id)){
