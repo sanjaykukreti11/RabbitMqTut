@@ -13,6 +13,7 @@ import views.html.createForm;
 
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeoutException;
 
@@ -27,8 +28,8 @@ public class UserController extends Controller {
 
 
     public Result  index(){
-        Set<Users> users_list = Users.allUsers();
-//        System.out.println( users_list.isEmpty() );
+        List<Users> users_list = Users.allUsers();
+
         return ok(users.render( users_list ));
     }
 
@@ -54,7 +55,7 @@ public class UserController extends Controller {
         System.out.println(data);
 
         Users.add(data);
-        return redirect( routes.UserController.index());
+        return redirect( routes.UserController.index() );
     }
 
 

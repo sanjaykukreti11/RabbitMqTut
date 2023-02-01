@@ -1,9 +1,14 @@
 package models;
 
 import Rabbit.Producer;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 
 import javax.persistence.*;
 import java.io.IOException;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.TimeoutException;
 
@@ -33,9 +38,22 @@ public class Users {
 
 
 
-    public static Set<Users> allUsers(){
+    public static List<Users> allUsers(){
 
-        return users_list;
+        Configuration con = new Configuration().configure().addAnnotatedClass(Users.class);
+        SessionFactory sf = con.buildSessionFactory();
+        Session ses = sf.openSession();
+        List<Users> usersList = null;
+        try {
+            usersList = ses.createNativeQuery("Select * from users", Users.class).getResultList();
+            return usersList;
+        }
+        catch (Exception e){
+            return usersList;
+        }
+        finally {
+            ses.close();
+        }
     }
 
 
