@@ -18,18 +18,38 @@ public class Producer {
     }
 
     public static void save() throws IOException, TimeoutException {
-        //// send data to rabbitmq server
 
-        ConnectionFactory factory  = new ConnectionFactory();
-        Connection connection = factory.newConnection(Config.AMQP_URL);
+        DirectExchange.declareExchange();
+        DirectExchange.declareQueues();
+        DirectExchange.declareBindings();
+        DirectExchange.publishMessage(userData);
 
-        Channel channel = connection.createChannel();
-        channel.queueDeclare( Config.DEFAULT_QUEUE , true , false , false, null );
-        channel.basicPublish("", Config.DEFAULT_QUEUE , null,userData.getBytes() );
+        Thread subscribe = new Thread(){
+            @Override
+            public void run() {
+                try {
+                    Consumer.Subscribe();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (TimeoutException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        };
 
+        Thread publish = new Thread(){
+            @Override
+            public void run() {
+                try {
+                    DirectExchange.publishMessage(userData);
+                } catch (IOException | TimeoutException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
 
-        channel.close();
-        connection.close();
+        subscribe.start();
+        publish.start();
 
 
     }

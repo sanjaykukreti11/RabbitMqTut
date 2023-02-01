@@ -17,7 +17,7 @@ import java.util.concurrent.TimeoutException;
 
 public class Consumer {
 
-    public static void main(String[] args) throws IOException, TimeoutException {
+    public static void Subscribe() throws IOException, TimeoutException {
 
 
 
@@ -30,6 +30,7 @@ public class Consumer {
 
             String userData = new String( delivery.getBody() );
             Users user = new ObjectMapper().readValue(userData, Users.class);
+            System.out.println(userData);
 
             // Store userData to database
             EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("pu");
